@@ -12,7 +12,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 // app.use(errorHandler);
 url = process.env.DATABASE_URL
-// console.log(url)
+console.log(url)
 mongoose.set('strictQuery', false)
 mongoose.connect(url)
 app.use(cors())
