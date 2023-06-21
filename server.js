@@ -14,7 +14,7 @@ app.use(express.urlencoded({extended:false}))
 url = process.env.DATABASE_URL
 console.log(url)
 mongoose.set('strictQuery', false)
-mongoose.connect(url)
+mongoose.connect(url , {useNewUrlParser : true})
 app.use(cors())
 const db = mongoose.connection
 
