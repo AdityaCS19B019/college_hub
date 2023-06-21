@@ -15,12 +15,12 @@ url = process.env.DATABASE_URL
 console.log(url)
 mongoose.set('strictQuery', false)
 mongoose.connect(url , {useNewUrlParser : true})
-app.use(cors())
-const db = mongoose.connection
+// app.use(cors())
+// const db = mongoose.connection
 
-db.on('error' , (error) => console.error(error))
+// db.on('error' , (error) => console.error(error))
 
-db.once('open' , () => console.log('connected to db'))
+// db.once('open' , () => console.log('connected to db'))
 app.get('/' , (req,res) => {
     res.send("Hellp bro")
 })
