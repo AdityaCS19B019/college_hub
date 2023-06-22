@@ -12,6 +12,35 @@ router.get('/users' , async (req,res) => {
     
 }),
 
+router.post('/signin' , async(req,res) => {
+    try
+    {
+        data = await users.find({username : req.body.username , password : req.body.password})
+        // console.log(data)
+        if(data.length == 0)
+        {
+            res.status(200).json({
+                msg : "Invalid credentials",
+                success : false
+            })
+        }
+        else
+        {
+            res.status(200).json({
+                msg : "Invalid credentials",
+                success : true,
+                data : data
+            })
+        }
+    }catch(e){
+        console.log(e)
+        res.status(500).json({
+            msg : "error while signing",
+            success : true
+        })
+    }
+})
+
 router.post('/createuser' , async (req,res) => {
     // console.log("request received")
     newuser = new users({
