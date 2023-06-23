@@ -13,10 +13,6 @@ const users = mongoose.Schema({
         type : String,
         required : true
     },
-    name : {
-        type : String,
-        required : true
-    },
     profilepic : {
         type : String,
         required : true
