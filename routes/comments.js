@@ -27,17 +27,68 @@ router.post('/addcomment' , async(req,res)=>{
     }
 })
 
-router.get('/getcooments' , async (req,res)=>{
+router.post('/getcomments' , async (req,res)=>{
     try{
         data = await comments.find({postid : mongoose.Types.ObjectId(req.body.postid)})
         res.status(200).json({
             "msg" : "retrieved",
-            "success" : true
+            "success" : true,
+            "data" : data
         })
     }catch(e){
         res.status(400).json({
             "msg" : "error while retreiving",
             "success" : true
+        })
+    }
+})
+
+router.post('/like' , async(req,res) => {
+    try{
+        data = await comments.findByIdAndUpdate(
+            {
+                _id : mongoose.Types.ObjectId(req.body.commentid)
+            },
+            {
+                $inc: {upvotes: 1} ,
+            },
+            {
+                new : true
+            }
+        )
+        res.status(200).json({
+            "success" : true,
+            "msg" : "Liked"
+        })
+    }catch(e){
+        res.status(200).json({
+            "success" : false,
+            "msg" : "failed to like"
+        })
+    }
+})
+
+router.post('/dislike' , async(req,res) => {
+    try{
+        data = await comments.findByIdAndUpdate(
+            {
+                _id : mongoose.Types.ObjectId(req.body.commentid)
+            },
+            {
+                $inc: {downvotes: 1} ,
+            },
+            {
+                new : true
+            }
+        )
+        res.status(200).json({
+            "success" : true,
+            "msg" : "disliked"
+        })
+    }catch(e){
+        res.status(200).json({
+            "success" : false,
+            "msg" : "Failed to dislike"
         })
     }
 })
