@@ -7,7 +7,7 @@ const posts = require('../models/post')
 
 const router = express.Router()
 
-router.put('/newpost' , async(req,res) => {
+router.post('/newpost' , async(req,res) => {
     try{
         newpost = new posts({
             postdesc : req.body.postdesc,
