@@ -44,4 +44,23 @@ router.get('/allposts' , async(req,res) => {
     }
 })
 
+router.post('/myposts' , async (req,res) => {
+    try{
+        const data = await posts.find({
+            postowner : req.body.postowner
+        })
+        res.status(200).json({
+            "success" : true,
+            "mag" : "reteived",
+            data : data
+        })
+    }catch(e){
+        console.log(e)
+        res.status(400).json({
+            "success" : false,
+            "msg" : "error while retrieving", 
+        })
+    }
+})
+
 module.exports = router
